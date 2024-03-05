@@ -1,0 +1,30 @@
+<div class="search">
+  <input class="search__input" type="text" [(ngModel)]="searchValue" (keyup)="getSearchData($event)">
+  <button class="search__button" (click)="getSearchData($event)">Find</button>
+</div>
+@if(userService.data()){
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Login</th>
+        <th>Avatar</th>
+        <th>Link</th>
+        <th>Role</th>
+        <th>Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(data of userService.data(); track data.id){
+        <tr>
+          <td>{{data.node_id}}</td>
+          <td>{{data.login}}</td>
+          <td><img class="table__img" [src]="data.avatar_url" alt="no image"></td>
+          <td><a [href]="data.url" target="_blank">url</a></td>
+          <td>{{data.type}}</td>
+          <td>{{data.site_admin?"Yes":"No"}}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
